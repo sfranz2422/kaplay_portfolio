@@ -5,11 +5,28 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div id="app">
+      <div>
+        <p class="note">Tap/Click around to move</p>
+
+        <div id="textbox-container" style="display: none">
+          <div id="textbox">
+            <p id="dialogue" class="ui-text"></p>
+            <div class="btn-container">
+              <button id="close" class="ui-close-btn">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <canvas id="game"></canvas>
+    </div>
+
+    
     <script src="kaplay.js"> </script>
     <script src="kaplayLoader.js"> </script> 
     <script src="menu.js"> </script>
     <script src="game.js"> </script>
-  <script src="gameOver.js"> </script>
+    <script src="gameOver.js"> </script>
     <script src="scenes.js"> </script>
 <!-- portfolio pushed-->
 

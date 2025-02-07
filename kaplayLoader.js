@@ -25,10 +25,16 @@ const dialogueData = {
 
 
 kaplay({
-
+    // fullscreen:true,
+  scale:4,
+  width:240,
+  height:96,
    touchToMouse: true,
    canvas: document.getElementById("game"),
   // debug: false, // set to false once ready for production
 
 })
+
+ 
+
 

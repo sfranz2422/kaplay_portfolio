@@ -66,13 +66,18 @@ add([
   // steve.play("idle");
 
   steve.onUpdate(() => {
-    setCamPos(steve.pos.x, height());
+    if(getCamPos().x < 40){
+      setCamPos(40, height());
+    }
+    else{
+      setCamPos(steve.pos.x, height());
+    }
   });
 
-  steve.onPhysicsResolve(() => {
-    // Set the viewport center to player.pos
-  setCamPos(steve.pos.x, height());
-  });
+  // steve.onPhysicsResolve(() => {
+  //   // Set the viewport center to player.pos
+  // setCamPos(steve.pos.x, height());
+  // });
 
   onKeyDown("right", () => {
     // steve.play("run")
@@ -116,7 +121,16 @@ add([
   });
 
 
-
+  // This will run every frame
+  onUpdate(() => {
+  // debug.log(steve.pos.x)
+    if(getCamPos().x < 40){
+      setCamPos(40, height());
+    }
+    if (steve.pos.x < -69){
+      steve.pos.x = -69
+    }
+  })
 
   onKeyPress("t", ()=>{
     textbox.innerHTML = "<h1>Franz</h1>"

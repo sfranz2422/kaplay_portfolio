@@ -22,10 +22,13 @@ loadSprite("steve", "/steve.png", {
     },
 });
 
-const SPEED = 80;
+
 setGravity(640);
 
 scene("game",() =>{
+  const SPEED = 80;
+  let targetX = null;
+  const scaleFactor = 4; // Your game scale
 
 
 add([
@@ -74,51 +77,18 @@ add([
     }
   });
 
-  // steve.onPhysicsResolve(() => {
-  //   // Set the viewport center to player.pos
-  // setCamPos(steve.pos.x, height());
-  // });
 
-  onKeyDown("right", () => {
-    // steve.play("run")
-    steve.move(SPEED, 0);
-      steve.flipX = false;
-    if (steve.isGrounded() && steve.curAnim() !== "run"){
-      steve.play("run")
-    }
-
-  });
-
-  onKeyDown("left", () => {
-    // steve.play("run")
-    steve.move(-SPEED, 0);
-      steve.flipX = true;
-    if (steve.isGrounded() && steve.curAnim() !== "run"){
-      steve.play("run")
-    }
-
-    onKeyRelease('left', ()=>{
-      if(steve.isGrounded() && !isKeyDown("left") && !isKeyDown("right")){
-        steve.play("idle")
-      }
-    })
-
-    onKeyRelease('right', ()=>{
-      if(steve.isGrounded() && !isKeyDown("left") && !isKeyDown("right")){
-        steve.play("idle")
-      }
-    })
  
     steve.onCollide("desk", (desk) => {
         // destroy(desk);
-      textbox.innerHTML = "<h1>Franz</h1>"
+      textbox.innerHTML = "<h1><a target='_blank' href='https://www.google.com/'>Franz</a></h1>"
 
       if (textbox.style.display === "none") {
         textbox.style.display = "block";
       } 
       
     });
-  });
+  // });
 
 
   // This will run every frame
@@ -130,7 +100,37 @@ add([
     if (steve.pos.x < -69){
       steve.pos.x = -69
     }
+    if (targetX !== null) {
+        let distance = targetX - steve.pos.x;
+
+        if (Math.abs(distance) > 5) { 
+            let direction = distance > 0 ? 1 : -1;
+            steve.move(direction * SPEED, 0);
+
+            // Flip character based on direction
+            steve.flipX = direction < 0; 
+
+            // Play run animation if not already playing
+            if (steve.curAnim() !== "run") {
+                steve.play("run");
+            }
+
+        } else {
+            targetX = null;
+
+            // Stop animation when reaching the target
+            steve.play("idle");
+        }
+    }
   })
+
+
+  onClick(() => {
+      const worldMousePos = mousePos().x + getCamPos().x - width() / 2; // Adjust for camera position
+      targetX = worldMousePos; // Store the correct world position
+  });
+
+
 
   onKeyPress("t", ()=>{
     textbox.innerHTML = "<h1>Franz</h1>"
@@ -147,7 +147,10 @@ add([
     textbox.style.display = "none";
     
   });
-  
+
+
+
+
 // go("gameOver")
 
 })

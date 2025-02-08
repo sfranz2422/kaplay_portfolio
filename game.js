@@ -1,4 +1,12 @@
 const textbox = document.getElementById("textbox");
+textbox.addEventListener("click", () => {
+    // Toggle the visibility of the dialog box
+    if (textbox.style.display === "block") {
+        textbox.style.display = "none";  // Hide it
+    } else {
+        textbox.style.display = "block";  // Show it
+    }
+});
 
 loadSprite("back", "/port4.png");
 loadSprite("desk", "/desk.png");

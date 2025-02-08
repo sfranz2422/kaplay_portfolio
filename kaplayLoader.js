@@ -1,4 +1,4 @@
-const scaleFactor = 4;
+const scaleFactor = 5;
 
 const dialogueData = {
   pc: `This is my PC. I work mostly in JavaScript/TypeScript these days.
@@ -26,7 +26,7 @@ const dialogueData = {
 
 kaplay({
     // fullscreen:true,
-  scale:4,
+  scale:scaleFactor,
   width:240,
   height:96,
    touchToMouse: true,

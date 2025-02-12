@@ -1,12 +1,12 @@
-const textbox = document.getElementById("textbox");
-textbox.addEventListener("click", () => {
-    // Toggle the visibility of the dialog box
-    if (textbox.style.display === "block") {
-        textbox.style.display = "none";  // Hide it
-    } else {
-        textbox.style.display = "block";  // Show it
-    }
-});
+// const textbox = document.getElementById("textbox");
+// textbox.addEventListener("click", () => {
+//     // Toggle the visibility of the dialog box
+//     if (textbox.style.display === "block") {
+//         textbox.style.display = "none";  // Hide it
+//     } else {
+//         textbox.style.display = "block";  // Show it
+//     }
+// });
 
 loadSprite("back", "/port4.png");
 loadSprite("desk", "/desk.png");
@@ -25,6 +25,7 @@ loadSprite("potpanshelf", "/potpanshelf.png");
 loadSprite("tablewithplants", "/tableiwthplants.png");
 loadSprite("tvback", "/tvback.png");
 loadSprite("tvstand", "/tvstand.png");
+loadSprite("gamingsetup", "/gamingsetup.png");
 
 
 loadSprite("steve", "/steve.png", {
@@ -79,6 +80,13 @@ add([
     "couch"
   ]);
 
+  add([
+    sprite("gamingsetup"), 
+    pos(250,122),
+    area(),
+    anchor("center"),
+    "gamingsetup"
+  ]);
 
 
 
@@ -112,10 +120,40 @@ add([
   });
 
 
- 
+
+
+  steve.onCollide("gamingsetup", (gamingsetup) => {
+      // destroy(desk);
+    textbox.innerHTML = dialogueData.gamingsetup
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
+
+  steve.onCollide("couch", (couch) => {
+      // destroy(desk);
+    textbox.innerHTML = dialogueData.couch
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
+  
+  steve.onCollide("bookshelf", (bookshelf) => {
+      // destroy(desk);
+    textbox.innerHTML = dialogueData.bookshelf
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
     steve.onCollide("desk", (desk) => {
         // destroy(desk);
-      textbox.innerHTML = "<p>This is my desk, the heart of my creativity. This is where I work, plan, and bring ideas to life. Whether it’s designing a new project, brainstorming solutions, or organizing my thoughts, my desk is where it all happens. Check out some of the projects I’ve worked on here!</p>"
+      textbox.innerHTML = dialogueData.desk
 
       if (textbox.style.display === "none") {
         textbox.style.display = "block";
@@ -166,7 +204,7 @@ add([
 
   steve.onClick(() => {
       // This will run when you click on the player
-    textbox.innerHTML = "<p>Welcome to my interactive portfolio! <br>In this 2D world, you can explore a virtual version of my house, where each object offers a bit of insight into my work and creativity. To begin your journey, simply click anywhere in the room to move. You\’ll be able to interact with various objects along the way. When you hover over or click on an object, a short description will pop up, sharing more about it (and about me!).<br>Enjoy your visit, and feel free to explore at your own pace!</p>"
+    textbox.innerHTML = dialogueData.me
 
     if (textbox.style.display === "none") {
       textbox.style.display = "block";

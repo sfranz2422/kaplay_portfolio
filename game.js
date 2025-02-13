@@ -1,12 +1,17 @@
-// const textbox = document.getElementById("textbox");
-// textbox.addEventListener("click", () => {
-//     // Toggle the visibility of the dialog box
-//     if (textbox.style.display === "block") {
-//         textbox.style.display = "none";  // Hide it
-//     } else {
-//         textbox.style.display = "block";  // Show it
-//     }
-// });
+const textbox = document.getElementById("textbox");
+textbox.addEventListener("click", () => {
+    // Toggle the visibility of the dialog box
+    if (textbox.style.display === "block" && textbox.innerHTML == dialogueData.me) {
+        textbox.style.display = "none";  // Hide it
+    } else {
+        textbox.style.display = "block";  // Show it
+    }
+});
+
+const MIN_CAM_X = 40; // Left boundary
+const MAX_CAM_X = 760; // Adjust this based on your background width
+
+
 
 loadSprite("back", "/port4.png");
 loadSprite("desk", "/desk.png");
@@ -26,6 +31,10 @@ loadSprite("tablewithplants", "/tableiwthplants.png");
 loadSprite("tvback", "/tvback.png");
 loadSprite("tvstand", "/tvstand.png");
 loadSprite("gamingsetup", "/gamingsetup.png");
+loadSprite("certificate", "/cert.png");
+loadSprite("tv", "/tv.png");
+loadSprite("printer", "/printer.png");
+loadSprite("hanginglight", "/hanginglight.png");
 
 
 loadSprite("steve", "/steve.png", {
@@ -39,6 +48,7 @@ loadSprite("steve", "/steve.png", {
         },
         "idle": 0,
     },
+  
 });
 
 
@@ -56,17 +66,25 @@ add([
    // body({ isStatic: true }),
   ]);
 
-  add([
+  const desk = add([
     sprite("desk"), 
     pos(40,123),
-    area(),
+    area({shape: new Rect(vec2(5,0),40,40)}),
     anchor("center"),
     "desk"
   ]);
+
+  const printer = add([
+    sprite("printer"), 
+    pos(16,107),
+    area(),
+    anchor("center"),
+    "printer"
+  ]);
   
-  add([
+  const bookshelf = add([
     sprite("bookshelf"), 
-    pos(-20,117),
+    pos(-50,117),
     area(),
     anchor("center"),
     "bookshelf"
@@ -104,26 +122,15 @@ add([
     pos(40,75),
     anchor("center"),
     scale(1),
-    area(),
+    area({shape: new Rect(vec2(0,-20),10,80)}),
     body(),
- "steve"
+ "steve",
+    z(500),
   ]);
-  // steve.play("idle");
-
-  steve.onUpdate(() => {
-    if(getCamPos().x < 40){
-      setCamPos(40, height());
-    }
-    else{
-      setCamPos(steve.pos.x, height());
-    }
-  });
-
 
 
 
   steve.onCollide("gamingsetup", (gamingsetup) => {
-      // destroy(desk);
     textbox.innerHTML = dialogueData.gamingsetup
 
     if (textbox.style.display === "none") {
@@ -133,7 +140,6 @@ add([
   });
 
   steve.onCollide("couch", (couch) => {
-      // destroy(desk);
     textbox.innerHTML = dialogueData.couch
 
     if (textbox.style.display === "none") {
@@ -143,7 +149,6 @@ add([
   });
   
   steve.onCollide("bookshelf", (bookshelf) => {
-      // destroy(desk);
     textbox.innerHTML = dialogueData.bookshelf
 
     if (textbox.style.display === "none") {
@@ -152,7 +157,6 @@ add([
 
   });
     steve.onCollide("desk", (desk) => {
-        // destroy(desk);
       textbox.innerHTML = dialogueData.desk
 
       if (textbox.style.display === "none") {
@@ -160,18 +164,25 @@ add([
       } 
       
     });
-  // });
+
+  steve.onCollide("printer", (printer) => {
+    textbox.innerHTML = dialogueData.printer
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
+ 
 
 
   // This will run every frame
   onUpdate(() => {
-  // debug.log(steve.pos.x)
-    if(getCamPos().x < 40){
-      setCamPos(40, height());
-    }
-    if (steve.pos.x < -69){
-      steve.pos.x = -69
-    }
+
+
+    setCamPos(clamp(steve.pos.x, MIN_CAM_X, MAX_CAM_X), height());
+
+    steve.pos.x = clamp(steve.pos.x, -69, MAX_CAM_X + 100); 
     if (targetX !== null) {
         let distance = targetX - steve.pos.x;
 
@@ -198,6 +209,10 @@ add([
 
 
   onClick(() => {
+    console.log(`Camera Position ${getCamPos().x}`)
+    console.log(`Steve Position ${steve.pos.x}`)
+
+
       const worldMousePos = mousePos().x + getCamPos().x - width() / 2; // Adjust for camera position
       targetX = worldMousePos; // Store the correct world position
   });
@@ -206,27 +221,81 @@ add([
       // This will run when you click on the player
     textbox.innerHTML = dialogueData.me
 
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
     } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
 
   });
 
-  onKeyPress("t", ()=>{
-    textbox.innerHTML = "<h1>Franz</h1>"
+  desk.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.desk
 
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } else {
+    if (textbox.style.display === "block") {
       textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
     }
-  })
+
+  });
+
+  printer.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.printer
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+
+  });
+
+  bookshelf.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.printer
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+
+  });
+  
+  // onKeyPress("t", ()=>{
+  //   textbox.innerHTML = "<h1>Franz</h1>"
+
+  //   if (textbox.style.display === "none") {
+  //     textbox.style.display = "block";
+  //   } else {
+  //     textbox.style.display = "none";
+  //   }
+  // })
 
 
   steve.onCollideEnd("desk", (a) => {
     textbox.style.display = "none";
-    
   });
+  steve.onCollideEnd("couch", (a) => {
+    textbox.style.display = "none";
+  });
+  steve.onCollideEnd("bookshelf", (a) => {
+    textbox.style.display = "none";
+  });
+  steve.onCollideEnd("gamingsetup", (a) => {
+    textbox.style.display = "none";
+  });
+  steve.onCollideEnd("printer", (a) => {
+    textbox.style.display = "none";
+  });
+
 
 
 

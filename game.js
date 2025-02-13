@@ -8,6 +8,23 @@ textbox.addEventListener("click", () => {
     }
 });
 
+
+function checkOrientation(){
+  if (window.innerHeight > window.innerWidth){
+    document.getElementById("orientation-warning").style.display = "block";
+  }
+  else{
+    document.getElementById("orientation-warning").style.display = "none";
+
+  }
+}
+
+
+window.addEventListener("DOMContentLoaded", checkOrientation)
+window.addEventListener("resize", checkOrientation)
+window.addEventListener("orientationchange", checkOrientation)
+
+
 const MIN_CAM_X = 40; // Left boundary
 const MAX_CAM_X = 760; // Adjust this based on your background width
 
@@ -35,6 +52,13 @@ loadSprite("certificate", "/cert.png");
 loadSprite("tv", "/tv.png");
 loadSprite("printer", "/printer.png");
 loadSprite("hanginglight", "/hanginglight.png");
+loadSprite("tallplant", "/tallplant.png");
+loadSprite("dishwasher", "/dishwasher.png");
+loadSprite("fridge", "/fridge.png");
+loadSprite("hangingpan", "/hangingpan.png");
+loadSprite("hood", "/hood.png");
+loadSprite("oven", "/oven.png");
+loadSprite("stovepan", "/stovepan.png");
 
 
 loadSprite("steve", "/steve.png", {
@@ -74,6 +98,129 @@ add([
     "desk"
   ]);
 
+  add([
+    sprite("calendar"), 
+    pos(40,90),
+    area(),
+    anchor("center"),
+    "calendar"
+  ]);
+
+
+  const certificate = add([
+    sprite("certificate"), 
+    pos(90,100),
+    area(),
+    anchor("center"),
+    "certificate"
+  ]);
+
+  add([
+    sprite("certificate"), 
+    pos(90,115),
+    area(),
+    anchor("center"),
+    "certificate"
+  ]);
+
+  add([
+    sprite("lamp"), 
+    pos(390,118),
+    area(),
+    anchor("center"),
+    "lamp"
+  ]);
+
+  const tv = add([
+    sprite("tv"), 
+    pos(500,108),
+    area(),
+    anchor("center"),
+    "tv"
+  ]);
+  add([
+    sprite("tvstand"), 
+    pos(500,131),
+    area(),
+    anchor("center"),
+    "tvstand"
+  ]);
+
+  add([
+    sprite("tallplant"), 
+    pos(420,120),
+    area(),
+    anchor("center"),
+    "tallplant"
+  ]);
+
+  const chair = add([
+    sprite("chair"), 
+    pos(550,128),
+    area(),
+    anchor("center"),
+    "chair",
+  
+  ]);
+  chair.flipX = true;
+  
+  add([
+    sprite("clock"), 
+    pos(150,90),
+    area(),
+    anchor("center"),
+    "clock"
+  ]);
+
+  add([
+    sprite("tablewithplants"), 
+    pos(150,123),
+    area(),
+    anchor("center"),
+    "tablewithplants"
+  ]);
+
+  add([
+    sprite("hanginglight"), 
+    pos(163,55),
+    area(),
+    anchor("center"),
+    "hanginglight"
+  ]);
+
+  add([
+    sprite("hanginglight"), 
+    pos(500,55),
+    area(),
+    anchor("center"),
+    "hanginglight"
+  ]);
+
+  
+  add([
+    sprite("ceilingfan"), 
+    pos(350,55),
+    area(),
+    anchor("center"),
+    "ceilingfan"
+  ]);
+
+  add([
+    sprite("ceilingfan"), 
+    pos(675,55),
+    area(),
+    anchor("center"),
+    "ceilingfan"
+  ]);
+
+  add([
+    sprite("ceilingfan"), 
+    pos(25,55),
+    area(),
+    anchor("center"),
+    "ceilingfan"
+  ]);
+  
   const printer = add([
     sprite("printer"), 
     pos(16,107),
@@ -89,6 +236,59 @@ add([
     anchor("center"),
     "bookshelf"
   ]);
+
+  const door = add([
+    sprite("door"), 
+    pos(850,117),
+    area(),
+    anchor("center"),
+    "door"
+  ]);
+
+
+  add([
+    sprite("fridge"), 
+    pos(650,115),
+    area(),
+    anchor("center"),
+    "fridge",
+    scale(1.5)
+  ]);
+  add([
+    sprite("oven"), 
+    pos(700,130),
+    area(),
+    anchor("center"),
+    "oven",
+    
+  ]);
+
+  add([
+    sprite("potpanshelf"), 
+    pos(700,95),
+    area(),
+    anchor("center"),
+    "potpanshelf",
+
+  ]);
+
+  const hangingpan = add([
+    sprite("hangingpan"), 
+    pos(718,110),
+    area(),
+    anchor("center"),
+    "hangingpan",
+
+  ]);
+  
+  add([
+    sprite("dishwasher"), 
+    pos(732,130),
+    area(),
+    anchor("center"),
+    "dishwasher",
+
+  ]);
   
   add([
     sprite("couch"), 
@@ -96,6 +296,14 @@ add([
     area(),
     anchor("center"),
     "couch"
+  ]);
+
+  add([
+    sprite("painting"), 
+    pos(347,90),
+    area(),
+    anchor("center"),
+    "painting"
   ]);
 
   add([
@@ -119,7 +327,7 @@ add([
   
   const steve = add([
       sprite("steve"), 
-    pos(40,75),
+    pos(189,75),
     anchor("center"),
     scale(1),
     area({shape: new Rect(vec2(0,-20),10,80)}),
@@ -138,6 +346,16 @@ add([
     } 
 
   });
+
+  steve.onCollide("certificate", (certificate) => {
+    textbox.innerHTML = dialogueData.certificate
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
+
 
   steve.onCollide("couch", (couch) => {
     textbox.innerHTML = dialogueData.couch
@@ -173,8 +391,23 @@ add([
     } 
 
   });
- 
+  steve.onCollide("door", (door) => {
+    textbox.innerHTML = dialogueData.door
 
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
+
+  steve.onCollide("tv", (tv) => {
+    textbox.innerHTML = dialogueData.tv
+
+    if (textbox.style.display === "none") {
+      textbox.style.display = "block";
+    } 
+
+  });
 
   // This will run every frame
   onUpdate(() => {
@@ -209,6 +442,11 @@ add([
 
 
   onClick(() => {
+    const textbox = document.getElementById("textbox");
+    if (textbox.style.display === "block" && textbox.innerHTML == dialogueData.me) {
+        textbox.style.display = "none";  // Hide it
+    } 
+    
     console.log(`Camera Position ${getCamPos().x}`)
     console.log(`Steve Position ${steve.pos.x}`)
 
@@ -268,7 +506,45 @@ add([
     }
 
   });
-  
+
+  door.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.door
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+
+  });
+
+  certificate.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.certificate
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+
+  });
+
+  tv.onClick(() => {
+      // This will run when you click on the player
+    textbox.innerHTML = dialogueData.tv
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+
+  });
   // onKeyPress("t", ()=>{
   //   textbox.innerHTML = "<h1>Franz</h1>"
 
@@ -295,11 +571,32 @@ add([
   steve.onCollideEnd("printer", (a) => {
     textbox.style.display = "none";
   });
+  steve.onCollideEnd("door", (a) => {
+    textbox.style.display = "none";
+  });
+  steve.onCollideEnd("certificate", (a) => {
+    textbox.style.display = "none";
+  });
+  steve.onCollideEnd("tv", (a) => {
+    textbox.style.display = "none";
+  });
+
+// steve.trigger("click")// not working
+  
+  on("start", "steve", () => {
+    textbox.innerHTML = dialogueData.me
+
+    if (textbox.style.display === "block") {
+      textbox.style.display = "none";
+    } 
+    else {
+        textbox.style.display = "block";  // Show it
+    }
+  });
 
 
-
-
-
+    steve.trigger("start");
+  
 // go("gameOver")
 
 })

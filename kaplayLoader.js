@@ -3,8 +3,8 @@ const scaleFactor = 5;
 const dialogueData = {
   desk: `This is my PC. I work mostly in Python these days for my backend development work but I've made few games in JavaScript and GDScript. Anyway regardless of the language, I just like programming.<br>
 Here is my <a href="https://github.com/sfranz2422" target="_blank">Github</a> and <a href="https://www.linkedin.com/in/steve-j-franz-3538942b/" target="_blank">LinkedIn</a>`,
-  tv: `This is my TV.  I like to play PS5 and Switch games mostly RPGs.  I'm actually the esports coach in my school.`,
-certificates: `These are some of my certifications. I've worked in some type of help desk and school most of my career. I'm Comptia A+ certified and previously I was Cisco CCNA certified.  As far as teaching goes, I'm certified to teach math in grades 7-12, previously I taught a college in high school Calculus class.`,
+  tv: `This is my TV.  I like to play PS5 and Switch games mostly RPGs.  I'm actually the esports coach at my school.`,
+certificate: `These are some of my certifications. I've worked in some type of help desk and school most of my career. I'm Comptia A+ certified and previously I was Cisco CCNA certified.  As far as teaching goes, I'm certified to teach math in grades 7-12, previously I taught a college in high school Calculus class.`,
 couch: `That's my couch. I like to relax here and watch YouTube and CSI reruns.`,
 printer: `This is my resume. <a href="https://github.com/sfranz2422/resume/blob/main/Steve_Franz_Resume_2025.pdf" target="_blank">Check it out.</a>
   Contact me at <a href="mailto:stephenfranz22@gmail.com">stephenfranz22@gmail.com</a> if you have any interesting job opportunities!`,

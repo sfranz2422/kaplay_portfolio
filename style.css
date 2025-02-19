@@ -3,16 +3,38 @@
   src: url(monogram.ttf);
 }
 
-body {
+p{
   font-family: monogram, monospace;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   overflow: hidden;
 }
 
+p {
+  font-size: 10px; /* Default for smaller devices */
+  /* line-height: 1.5; */
+}
+
+@media (min-width: 600px) { /* Tablets and larger phones in landscape */
+  p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 900px) { /* Small laptops and larger tablets */
+  p {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1200px) { /* Desktop screens */
+  p {
+    font-size: 22px;
+  }
+}
 /* #game{
     position: absolute;
     top: 0;
     left: 0;
     width: 100vw;  /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-} */
+    /* height: 100vh; /* Full viewport height */
+/* } */ 

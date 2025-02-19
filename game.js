@@ -59,6 +59,7 @@ loadSprite("hangingpan", "/hangingpan.png");
 loadSprite("hood", "/hood.png");
 loadSprite("oven", "/oven.png");
 loadSprite("stovepan", "/stovepan.png");
+loadSprite("fridgeopen", "/fridgeopen.png");
 
 
 loadSprite("steve", "/steve.png", {
@@ -82,7 +83,9 @@ scene("game",() =>{
   const SPEED = 80;
   let targetX = null;
   const scaleFactor = 5; // Your game scale
-
+  let isMenuDisplayed = false
+  let openPressed = false
+  let closePressed = false
 
 add([
       sprite("back"), 
@@ -246,14 +249,26 @@ add([
   ]);
 
 
-  add([
+  const fridge = add([
     sprite("fridge"), 
     pos(650,115),
     area(),
     anchor("center"),
     "fridge",
-    scale(1.5)
+    scale(1.5),
   ]);
+  
+  const fridgeopen = add([
+    sprite("fridgeopen"), 
+    pos(639,115),
+    area(),
+    anchor("center"),
+    "fridgeopen",
+    scale(1.5),
+    // { hidden: true }, // Start hidden
+  ]);
+      fridgeopen.hidden = true
+  
   add([
     sprite("oven"), 
     pos(700,130),
@@ -438,9 +453,129 @@ add([
             steve.play("idle");
         }
     }
-  })
+
+if (steve.pos.x > 580){
+  if (isMenuDisplayed == false){
+    displayMenu()
+  }
+}
+else if (steve.pos.x <= 580){
+  let theUi = get("ui")
+  // console.log(theUi)
+  if (theUi.length > 0){
+    destroy(theUi[0])
+    isMenuDisplayed = false
+  }
+}
+
+    if (openPressed == true){
+      
+    }
+
+    
+  }) // end of onupdate
+
+ function displayMenu(){
+   isMenuDisplayed = true
+   let theUi = get("ui")
+   console.log(theUi)
+  const ui = add([
+    fixed(),
+    "ui"
+  ])
+   
+    const openBtn = ui.add([
+      rect(24, 10, { radius: 8 }),
+      pos(100,10),
+      area(),
+      scale(1),
+      anchor("center"),
+      outline(.5),
+      color(255, 255, 255),
+    ]);
+
+    // add a child object that displays the text
+      openBtn.add([
+      text("Open", {
+        size:4,
+        align:"center"
+      }),
+      anchor("center"),
+      color(0, 0, 0),
+    ]);
 
 
+     openBtn.onHoverUpdate(() => {
+     const t = time() * 10;
+       openBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
+       openBtn.scale = vec2(1.2);
+     // setCursor("pointer");
+   });
+
+   // onHoverEnd() comes from area() component
+   // it runs once when the object stopped being hovered
+     openBtn.onHoverEnd(() => {
+       openBtn.scale = vec2(1);
+       openBtn.color = rgb();
+   });
+
+  openBtn.onClick(open)
+
+
+   const closeBtn = ui.add([
+     rect(24, 10, { radius: 8 }),
+     pos(130,10),
+     area(),
+     scale(1),
+     anchor("center"),
+     outline(.5),
+     color(255, 255, 255),
+   ]);
+
+   // add a child object that displays the text
+       closeBtn.add([
+     text("Close", {
+       size:4,
+       align:"center"
+     }),
+     anchor("center"),
+     color(0, 0, 0),
+   ]);
+
+
+      closeBtn.onHoverUpdate(() => {
+    const t = time() * 10;
+        closeBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
+        closeBtn.scale = vec2(1.2);
+    // setCursor("pointer");
+   });
+
+   // onHoverEnd() comes from area() component
+   // it runs once when the object stopped being hovered
+      closeBtn.onHoverEnd(() => {
+        closeBtn.scale = vec2(1);
+        closeBtn.color = rgb();
+   });
+
+     closeBtn.onClick(close)
+
+
+   
+ 
+}//end of display menu
+
+  
+function close(){
+    console.log("close button clicked")
+    closePressed = true
+}
+
+function open(){
+  console.log("open button clicked")
+  openPressed = true
+  
+}
+  
   onClick(() => {
     const textbox = document.getElementById("textbox");
     if (textbox.style.display === "block" && textbox.innerHTML == dialogueData.me) {
@@ -545,14 +680,59 @@ add([
     }
 
   });
-  // onKeyPress("t", ()=>{
-  //   textbox.innerHTML = "<h1>Franz</h1>"
 
-  //   if (textbox.style.display === "none") {
-  //     textbox.style.display = "block";
-  //   } else {
-  //     textbox.style.display = "none";
-  //   }
+
+ 
+  
+  fridge.onClick(() => {
+    debug.log("clicked on fridge")
+    console.log(" clicked on fridge")
+
+    if (openPressed == true){
+      const fridgeopen = add([
+        sprite("fridgeopen"), 
+          pos(639,115),
+          area(),
+          anchor("center"),
+          "fridgeopen",
+          scale(1.5),
+      ]);
+
+      let theFridge = get("fridge")
+      // console.log(theUi)
+      if (theFridge.length > 0){
+        destroy(theFridge[0])
+      }
+      openPressed == false
+    }
+
+
+
+
+    
+  }); //end of fridge on click
+
+  // fridgeopen.onClick(() => {
+  //   fridgeopen.hidden = true
+  //   const fridge = add([
+  //     sprite("fridge"), 
+  //     pos(639,115),
+  //     area(),
+  //     anchor("center"),
+  //     "fridge",
+  //     scale(1.5),
+  //   ]);
+  //   destroy(fridgeopen)
+
+  // });
+
+
+
+
+  
+  // onKeyPress("t", ()=>{
+  //    let theUi = get("ui")
+  //    console.log(theUi)
   // })
 
 

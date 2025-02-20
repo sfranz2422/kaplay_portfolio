@@ -87,27 +87,47 @@ scene("game",() =>{
   let openPressed = false
   let closePressed = false
 
+  function createSprite(name, spriteName, position,collisionShape) {
+      const obj = add([
+          sprite(spriteName),
+          pos(position),
+          anchor("center"),
+          area(collisionShape), // Required to detect clicks
+          name // Tag for identification
+      ]);
+
+      // Attach click event to each sprite
+      obj.onClick(() => {
+          console.log(`You clicked the ${name}!`);
+
+        if (openPressed){
+          debug.log(`You can't open ${name}`)
+        }
+        
+      });
+
+    //i can put an on destroy here too obj.onDestroy(()=>{})
+    
+      return obj;
+  }
+
+
+  
 add([
-      sprite("back"), 
-  pos(-80,48)
-   // body({ isStatic: true }),
+    sprite("back"), 
+    pos(-80,48)
   ]);
 
-  const desk = add([
-    sprite("desk"), 
-    pos(40,123),
-    area({shape: new Rect(vec2(5,0),40,40)}),
-    anchor("center"),
-    "desk"
-  ]);
+  const couch = createSprite("couch", "couch", vec2(350, 128));
+  const chair = createSprite("chair", "chair", vec2(550, 128));
+  chair.flipX = true;
+  const tallplant = createSprite("tallplant", "tallplant", vec2(420, 120));
+  const calendar = createSprite("calendar", "calendar", vec2(40, 90));
 
-  add([
-    sprite("calendar"), 
-    pos(40,90),
-    area(),
-    anchor("center"),
-    "calendar"
-  ]);
+  const desk = createSprite("desk", "desk", vec2(40, 123),{shape: new Rect(vec2(5,0),40,40)});
+
+
+
 
 
   const certificate = add([
@@ -149,23 +169,9 @@ add([
     "tvstand"
   ]);
 
-  add([
-    sprite("tallplant"), 
-    pos(420,120),
-    area(),
-    anchor("center"),
-    "tallplant"
-  ]);
 
-  const chair = add([
-    sprite("chair"), 
-    pos(550,128),
-    area(),
-    anchor("center"),
-    "chair",
-  
-  ]);
-  chair.flipX = true;
+
+
   
   add([
     sprite("clock"), 
@@ -305,13 +311,7 @@ add([
 
   ]);
   
-  add([
-    sprite("couch"), 
-    pos(350,128),
-    area(),
-    anchor("center"),
-    "couch"
-  ]);
+
 
   add([
     sprite("painting"), 
@@ -341,7 +341,7 @@ add([
   ]);
   
   const steve = add([
-      sprite("steve"), 
+    sprite("steve"), 
     pos(189,75),
     anchor("center"),
     scale(1),
@@ -492,6 +492,12 @@ else if (steve.pos.x <= 580){
       anchor("center"),
       outline(.5),
       color(255, 255, 255),
+      // this.onClick(() => {
+      //     console.log(`You clicked the ${name}!`);
+      //     open()
+      //     console.log("open button clicked")
+      //     openPressed = true
+      // }),
     ]);
 
     // add a child object that displays the text
@@ -568,6 +574,7 @@ else if (steve.pos.x <= 580){
 function close(){
     console.log("close button clicked")
     closePressed = true
+  
 }
 
 function open(){
@@ -576,7 +583,7 @@ function open(){
   
 }
   
-  onClick(() => {
+  onClick((obj) => {
     const textbox = document.getElementById("textbox");
     if (textbox.style.display === "block" && textbox.innerHTML == dialogueData.me) {
         textbox.style.display = "none";  // Hide it
@@ -588,6 +595,22 @@ function open(){
 
       const worldMousePos = mousePos().x + getCamPos().x - width() / 2; // Adjust for camera position
       targetX = worldMousePos; // Store the correct world position
+
+    if (!obj) return; // Ensure the click is on a valid object
+    console.log("Clicked tag(s):", obj.tags);
+    console.log(obj)
+
+    // Perform actions based on the tag
+    // if (obj.is("fridge")) {
+    //     console.log("You clicked the fridge!");
+    // } else if (obj.is("stove")) {
+    //     console.log("You clicked the stove!");
+    // } else if (obj.is("sink")) {
+    //     console.log("You clicked the sink!");
+    // }
+
+
+    
   });
 
   steve.onClick(() => {
@@ -688,7 +711,18 @@ function open(){
     debug.log("clicked on fridge")
     console.log(" clicked on fridge")
 
+   
+
+    
     if (openPressed == true){
+
+      let theFridge = get("fridge")
+      // console.log(theUi)
+      if (theFridge.length > 0){
+        destroy(theFridge[0])
+      }
+
+      
       const fridgeopen = add([
         sprite("fridgeopen"), 
           pos(639,115),
@@ -698,33 +732,41 @@ function open(){
           scale(1.5),
       ]);
 
-      let theFridge = get("fridge")
-      // console.log(theUi)
-      if (theFridge.length > 0){
-        destroy(theFridge[0])
-      }
-      openPressed == false
+
+      openPressed = false
     }
-
-
-
-
+    
+  
     
   }); //end of fridge on click
 
-  // fridgeopen.onClick(() => {
-  //   fridgeopen.hidden = true
-  //   const fridge = add([
-  //     sprite("fridge"), 
-  //     pos(639,115),
-  //     area(),
-  //     anchor("center"),
-  //     "fridge",
-  //     scale(1.5),
-  //   ]);
-  //   destroy(fridgeopen)
+  fridgeopen.onClick(() => {
+    console.log("fridge open clicked")
+    
+    
 
-  // });
+    
+   if (closePressed == true){
+
+      let theOpenFridge = get("fridgeopen")
+      console.log(theOpenFridge)
+      if (theOpenFridge.length > 0){
+        destroy(theOpenFridge[0])
+      }
+     
+      const fridge = add([
+        sprite("fridge"), 
+          pos(650,115),
+          area(),
+          anchor("center"),
+          "fridge",
+          scale(1.5),
+      ]);
+      
+      closePressed = false
+    }
+
+  });
 
 
 

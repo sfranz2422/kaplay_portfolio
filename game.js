@@ -53,13 +53,13 @@ loadSprite("tv", "/tv.png");
 loadSprite("printer", "/printer.png");
 loadSprite("hanginglight", "/hanginglight.png");
 loadSprite("tallplant", "/tallplant.png");
-loadSprite("dishwasher", "/dishwasher.png");
-loadSprite("fridge", "/fridge.png");
-loadSprite("hangingpan", "/hangingpan.png");
-loadSprite("hood", "/hood.png");
-loadSprite("oven", "/oven.png");
-loadSprite("stovepan", "/stovepan.png");
-loadSprite("fridgeopen", "/fridgeopen.png");
+// loadSprite("dishwasher", "/dishwasher.png");
+// loadSprite("fridge", "/fridge.png");
+// loadSprite("hangingpan", "/hangingpan.png");
+// loadSprite("hood", "/hood.png");
+// loadSprite("oven", "/oven.png");
+// loadSprite("stovepan", "/stovepan.png");
+// loadSprite("fridgeopen", "/fridgeopen.png");
 
 
 loadSprite("steve", "/steve.png", {
@@ -87,7 +87,7 @@ scene("game",() =>{
   let openPressed = false
   let closePressed = false
 
-  function createSprite(name, spriteName, position,collisionShape) {
+function createSprite(name, spriteName, position,collisionShape) {
       const obj = add([
           sprite(spriteName),
           pos(position),
@@ -99,335 +99,178 @@ scene("game",() =>{
       // Attach click event to each sprite
       obj.onClick(() => {
           console.log(`You clicked the ${name}!`);
-
+          textbox.innerHTML = dialogueData[name]
+          if (textbox.style.display === "block") {
+            textbox.style.display = "none";
+          } 
+          else {
+              textbox.style.display = "block";  // Show it
+          }
         if (openPressed){
           debug.log(`You can't open ${name}`)
         }
-        
-      });
+      });//end of onClick
 
-    //i can put an on destroy here too obj.onDestroy(()=>{})
-    
-      return obj;
-  }
-
-
-  
-add([
-    sprite("back"), 
-    pos(-80,48)
-  ]);
-
-  const couch = createSprite("couch", "couch", vec2(350, 128));
-  const chair = createSprite("chair", "chair", vec2(550, 128));
-  chair.flipX = true;
-  const tallplant = createSprite("tallplant", "tallplant", vec2(420, 120));
-  const calendar = createSprite("calendar", "calendar", vec2(40, 90));
-
-  const desk = createSprite("desk", "desk", vec2(40, 123),{shape: new Rect(vec2(5,0),40,40)});
-
-
-
-
-
-  const certificate = add([
-    sprite("certificate"), 
-    pos(90,100),
-    area(),
-    anchor("center"),
-    "certificate"
-  ]);
-
-  add([
-    sprite("certificate"), 
-    pos(90,115),
-    area(),
-    anchor("center"),
-    "certificate"
-  ]);
-
-  add([
-    sprite("lamp"), 
-    pos(390,118),
-    area(),
-    anchor("center"),
-    "lamp"
-  ]);
-
-  const tv = add([
-    sprite("tv"), 
-    pos(500,108),
-    area(),
-    anchor("center"),
-    "tv"
-  ]);
-  add([
-    sprite("tvstand"), 
-    pos(500,131),
-    area(),
-    anchor("center"),
-    "tvstand"
-  ]);
-
-
-
-
-  
-  add([
-    sprite("clock"), 
-    pos(150,90),
-    area(),
-    anchor("center"),
-    "clock"
-  ]);
-
-  add([
-    sprite("tablewithplants"), 
-    pos(150,123),
-    area(),
-    anchor("center"),
-    "tablewithplants"
-  ]);
-
-  add([
-    sprite("hanginglight"), 
-    pos(163,55),
-    area(),
-    anchor("center"),
-    "hanginglight"
-  ]);
-
-  add([
-    sprite("hanginglight"), 
-    pos(500,55),
-    area(),
-    anchor("center"),
-    "hanginglight"
-  ]);
-
-  
-  add([
-    sprite("ceilingfan"), 
-    pos(350,55),
-    area(),
-    anchor("center"),
-    "ceilingfan"
-  ]);
-
-  add([
-    sprite("ceilingfan"), 
-    pos(675,55),
-    area(),
-    anchor("center"),
-    "ceilingfan"
-  ]);
-
-  add([
-    sprite("ceilingfan"), 
-    pos(25,55),
-    area(),
-    anchor("center"),
-    "ceilingfan"
-  ]);
-  
-  const printer = add([
-    sprite("printer"), 
-    pos(16,107),
-    area(),
-    anchor("center"),
-    "printer"
-  ]);
-  
-  const bookshelf = add([
-    sprite("bookshelf"), 
-    pos(-50,117),
-    area(),
-    anchor("center"),
-    "bookshelf"
-  ]);
-
-  const door = add([
-    sprite("door"), 
-    pos(850,117),
-    area(),
-    anchor("center"),
-    "door"
-  ]);
-
-
-  const fridge = add([
-    sprite("fridge"), 
-    pos(650,115),
-    area(),
-    anchor("center"),
-    "fridge",
-    scale(1.5),
-  ]);
-  
-  const fridgeopen = add([
-    sprite("fridgeopen"), 
-    pos(639,115),
-    area(),
-    anchor("center"),
-    "fridgeopen",
-    scale(1.5),
-    // { hidden: true }, // Start hidden
-  ]);
-      fridgeopen.hidden = true
-  
-  add([
-    sprite("oven"), 
-    pos(700,130),
-    area(),
-    anchor("center"),
-    "oven",
-    
-  ]);
-
-  add([
-    sprite("potpanshelf"), 
-    pos(700,95),
-    area(),
-    anchor("center"),
-    "potpanshelf",
-
-  ]);
-
-  const hangingpan = add([
-    sprite("hangingpan"), 
-    pos(718,110),
-    area(),
-    anchor("center"),
-    "hangingpan",
-
-  ]);
-  
-  add([
-    sprite("dishwasher"), 
-    pos(732,130),
-    area(),
-    anchor("center"),
-    "dishwasher",
-
-  ]);
-  
-
-
-  add([
-    sprite("painting"), 
-    pos(347,90),
-    area(),
-    anchor("center"),
-    "painting"
-  ]);
-
-  add([
-    sprite("gamingsetup"), 
-    pos(250,122),
-    area(),
-    anchor("center"),
-    "gamingsetup"
-  ]);
-
-
-
-  
-  add([
-      rect(960, .5),
-      area(),
-      outline(.5),
-      pos(-80,142),
-      body({ isStatic: true }),
-  ]);
-  
-  const steve = add([
-    sprite("steve"), 
-    pos(189,75),
-    anchor("center"),
-    scale(1),
-    area({shape: new Rect(vec2(0,-20),10,80)}),
-    body(),
- "steve",
-    z(500),
-  ]);
-
-
-
-  steve.onCollide("gamingsetup", (gamingsetup) => {
-    textbox.innerHTML = dialogueData.gamingsetup
-
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
-
-  });
-
-  steve.onCollide("certificate", (certificate) => {
-    textbox.innerHTML = dialogueData.certificate
-
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
-
-  });
-
-
-  steve.onCollide("couch", (couch) => {
-    textbox.innerHTML = dialogueData.couch
-
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
-
-  });
-  
-  steve.onCollide("bookshelf", (bookshelf) => {
-    textbox.innerHTML = dialogueData.bookshelf
-
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
-
-  });
-    steve.onCollide("desk", (desk) => {
-      textbox.innerHTML = dialogueData.desk
+      obj.onCollide("steve", (steve) => {
+      textbox.innerHTML = dialogueData[name]
 
       if (textbox.style.display === "none") {
         textbox.style.display = "block";
-      } 
-      
-    });
+        }
+        });// end ofo onCollide
 
-  steve.onCollide("printer", (printer) => {
-    textbox.innerHTML = dialogueData.printer
+      obj.onCollideEnd("steve",(a)=>{
+        textbox.style.display = "none";
 
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
+      })
 
-  });
-  steve.onCollide("door", (door) => {
-    textbox.innerHTML = dialogueData.door
 
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
+      return obj;
+  }
 
-  });
+// function createHangingPan(name, spriteName, position,collisionShape) {
+//       const obj = add([
+//           sprite(spriteName),
+//           pos(position),
+//           anchor("center"),
+//           area(collisionShape), // Required to detect clicks
+//           name // Tag for identification
+//       ]);
 
-  steve.onCollide("tv", (tv) => {
-    textbox.innerHTML = dialogueData.tv
+//       // Attach click event to each sprite
+//   obj.onClick(() => {
+//       console.log(`You clicked the ${name}!`);
+//       textbox.innerHTML = dialogueData[name]
+//       if (textbox.style.display === "block") {
+//         textbox.style.display = "none";
+//       } 
+//       else {
+//           textbox.style.display = "block";  // Show it
+//       }
+//     if (openPressed){
+//       debug.log(`You can't open ${name}`)
+//     }
+//   });//end of onClick
 
-    if (textbox.style.display === "none") {
-      textbox.style.display = "block";
-    } 
+//       obj.onCollide("steve", (steve) => {
 
-  });
+        
+//         });// end of onCollide
 
-  // This will run every frame
+//       obj.onCollideEnd("steve",(a)=>{
+
+//       })
+
+
+//       return obj;
+//   }
+
+
+  // function createFridge(name, spriteName, position,collisionShape) {
+  //   const obj = add([
+  //       sprite(spriteName),
+  //       pos(position),
+  //       anchor("center"),
+  //       area(collisionShape), // Required to detect clicks
+  //       scale(1.5),
+  //       name // Tag for identification
+  //   ]);
+
+  //   // Attach click event to each sprite
+  // obj.onClick(() => {
+  //   console.log(`You clicked the ${name}!`);
+  //   textbox.innerHTML = dialogueData[name]
+  //   if (textbox.style.display === "block") {
+  //     textbox.style.display = "none";
+  //   } 
+  //   else {
+  //       textbox.style.display = "block";  // Show it
+  //   }
+  // if (openPressed){
+  //   debug.log(`You can't open ${name}`)
+  //   const fridgeopen = add([
+  //     sprite("fridgeopen"), 
+  //     pos(639,115),
+  //     area(),
+  //     anchor("center"),
+  //     "fridgeopen",
+  //     scale(1.5),
+  //   ]);
+  // }
+
+  // if (closePressed){
+  //   fridgeopen.hidden = true
+  // }  
+  // });//end of onClick
+
+  //   obj.onCollide("steve", (steve) => {
+
+
+  //     });// end of onCollide
+
+  //   obj.onCollideEnd("steve",(a)=>{
+
+  //   })
+
+
+  //   return obj;
+  // }
+  
+
+  
+add([sprite("back"), pos(-80,48)]);
+const steve = add([sprite("steve"), pos(189,75),anchor("center"),scale(1),area({shape: new Rect(vec2(0,-20),10,80)}),body(),"steve",z(500),]);
+add([sprite("certificate"), pos(90,115),area(),anchor("center"),"certificate"]);
+add([sprite("tvstand"), pos(500,131),area(),anchor("center"),"tvstand"]);
+add([sprite("clock"), pos(150,90),area(),anchor("center"),"clock"]);
+add([sprite("tallplant"), pos(420,120),area(),anchor("center"),"tallplant"]);
+add([sprite("calendar"), pos(40,90),area(),anchor("center"),"calendar"]);
+add([sprite("chair",{flipX:true}), pos(550,128),area(),anchor("center"),"chair"]);
+add([sprite("lamp"), pos(390,118),area(),anchor("center"),"lamp"]);
+add([sprite("tablewithplants"),pos(150,123),area(),anchor("center"),"tablewithplants"]);
+// add([sprite("oven"), pos(700,130),area(),anchor("center"),"oven",]);
+// add([sprite("potpanshelf"), pos(700,95),area(),anchor("center"),"potpanshelf",]);
+// add([sprite("dishwasher"), pos(732,130),area(),anchor("center"),"dishwasher",]);
+add([sprite("painting"), pos(347,90),area(),anchor("center"),"painting"]);
+add([rect(960, .5),area(),outline(.5),pos(-80,142),body({ isStatic: true }),]);
+add([sprite("hanginglight"), pos(163,55),area(),anchor("center"),"hanginglight"]);
+add([sprite("hanginglight"), pos(500,55),area(),anchor("center"),"hanginglight"]);
+add([sprite("ceilingfan"), pos(350,55),area(),anchor("center"),"ceilingfan"]);
+add([sprite("ceilingfan"), pos(675,55),area(),anchor("center"),"ceilingfan"]);
+add([sprite("ceilingfan"), pos(25,55),area(),anchor("center"),"ceilingfan"]);
+  
+const printer = createSprite("printer", "printer", vec2(16, 107));
+const bookshelf = createSprite("bookshelf", "bookshelf", vec2(-50, 117));
+const door = createSprite("door", "door", vec2(660, 117));
+const gamingsetup = createSprite("gamingsetup", "gamingsetup", vec2(250, 122));
+const desk = createSprite("desk", "desk", vec2(40, 123),{shape: new Rect(vec2(5,0),40,40)});
+// const hangingpan = createHangingPan("hangingpan", "hangingpan", vec2(718, 110));
+const couch = createSprite("couch", "couch", vec2(350, 128));
+const certificate = createSprite("certificate", "certificate", vec2(90, 100));
+const tv = createSprite("tv", "tv", vec2(500, 108));
+// const fridge = createFridge("fridge", "fridge", vec2(650, 115));
+  
+  // const fridge = add([
+  //   sprite("fridge"), 
+  //   pos(650,115),
+  //   area(),
+  //   anchor("center"),
+  //   "fridge",
+  //   scale(1.5),
+  // ]);
+  
+  // const fridgeopen = add([
+  //   sprite("fridgeopen"), 
+  //   pos(639,115),
+  //   area(),
+  //   anchor("center"),
+  //   "fridgeopen",
+  //   scale(1.5),
+  // ]);
+      // fridgeopen.hidden = true
+  
+// This will run every frame
   onUpdate(() => {
-
-
     setCamPos(clamp(steve.pos.x, MIN_CAM_X, MAX_CAM_X), height());
 
     steve.pos.x = clamp(steve.pos.x, -69, MAX_CAM_X + 100); 
@@ -454,134 +297,134 @@ add([
         }
     }
 
-if (steve.pos.x > 580){
-  if (isMenuDisplayed == false){
-    displayMenu()
-  }
-}
-else if (steve.pos.x <= 580){
-  let theUi = get("ui")
-  // console.log(theUi)
-  if (theUi.length > 0){
-    destroy(theUi[0])
-    isMenuDisplayed = false
-  }
-}
+// if (steve.pos.x > 580){
+//   if (isMenuDisplayed == false){
+//     displayMenu()
+//   }
+// }
+// else if (steve.pos.x <= 580){
+//   let theUi = get("ui")
+//   // console.log(theUi)
+//   if (theUi.length > 0){
+//     destroy(theUi[0])
+//     isMenuDisplayed = false
+//   }
+// }
 
-    if (openPressed == true){
+//     if (openPressed == true){
       
-    }
+//     }
 
     
   }) // end of onupdate
 
- function displayMenu(){
-   isMenuDisplayed = true
-   let theUi = get("ui")
-   console.log(theUi)
-  const ui = add([
-    fixed(),
-    "ui"
-  ])
+//  function displayMenu(){
+//    isMenuDisplayed = true
+//    let theUi = get("ui")
+//    console.log(theUi)
+//   const ui = add([
+//     fixed(),
+//     "ui"
+//   ])
    
-    const openBtn = ui.add([
-      rect(24, 10, { radius: 8 }),
-      pos(100,10),
-      area(),
-      scale(1),
-      anchor("center"),
-      outline(.5),
-      color(255, 255, 255),
-      // this.onClick(() => {
-      //     console.log(`You clicked the ${name}!`);
-      //     open()
-      //     console.log("open button clicked")
-      //     openPressed = true
-      // }),
-    ]);
+//     const openBtn = ui.add([
+//       rect(24, 10, { radius: 8 }),
+//       pos(100,10),
+//       area(),
+//       scale(1),
+//       anchor("center"),
+//       outline(.5),
+//       color(255, 255, 255),
+//       // this.onClick(() => {
+//       //     console.log(`You clicked the ${name}!`);
+//       //     open()
+//       //     console.log("open button clicked")
+//       //     openPressed = true
+//       // }),
+//     ]);
 
-    // add a child object that displays the text
-      openBtn.add([
-      text("Open", {
-        size:4,
-        align:"center"
-      }),
-      anchor("center"),
-      color(0, 0, 0),
-    ]);
-
-
-     openBtn.onHoverUpdate(() => {
-     const t = time() * 10;
-       openBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
-       openBtn.scale = vec2(1.2);
-     // setCursor("pointer");
-   });
-
-   // onHoverEnd() comes from area() component
-   // it runs once when the object stopped being hovered
-     openBtn.onHoverEnd(() => {
-       openBtn.scale = vec2(1);
-       openBtn.color = rgb();
-   });
-
-  openBtn.onClick(open)
+//     // add a child object that displays the text
+//       openBtn.add([
+//       text("Open", {
+//         size:4,
+//         align:"center"
+//       }),
+//       anchor("center"),
+//       color(0, 0, 0),
+//     ]);
 
 
-   const closeBtn = ui.add([
-     rect(24, 10, { radius: 8 }),
-     pos(130,10),
-     area(),
-     scale(1),
-     anchor("center"),
-     outline(.5),
-     color(255, 255, 255),
-   ]);
+//      openBtn.onHoverUpdate(() => {
+//      const t = time() * 10;
+//        openBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
+//        openBtn.scale = vec2(1.2);
+//      // setCursor("pointer");
+//    });
 
-   // add a child object that displays the text
-       closeBtn.add([
-     text("Close", {
-       size:4,
-       align:"center"
-     }),
-     anchor("center"),
-     color(0, 0, 0),
-   ]);
+//    // onHoverEnd() comes from area() component
+//    // it runs once when the object stopped being hovered
+//      openBtn.onHoverEnd(() => {
+//        openBtn.scale = vec2(1);
+//        openBtn.color = rgb();
+//    });
+
+//   openBtn.onClick(open)
 
 
-      closeBtn.onHoverUpdate(() => {
-    const t = time() * 10;
-        closeBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
-        closeBtn.scale = vec2(1.2);
-    // setCursor("pointer");
-   });
+//    const closeBtn = ui.add([
+//      rect(24, 10, { radius: 8 }),
+//      pos(130,10),
+//      area(),
+//      scale(1),
+//      anchor("center"),
+//      outline(.5),
+//      color(255, 255, 255),
+//    ]);
 
-   // onHoverEnd() comes from area() component
-   // it runs once when the object stopped being hovered
-      closeBtn.onHoverEnd(() => {
-        closeBtn.scale = vec2(1);
-        closeBtn.color = rgb();
-   });
+//    // add a child object that displays the text
+//        closeBtn.add([
+//      text("Close", {
+//        size:4,
+//        align:"center"
+//      }),
+//      anchor("center"),
+//      color(0, 0, 0),
+//    ]);
 
-     closeBtn.onClick(close)
+
+//       closeBtn.onHoverUpdate(() => {
+//     const t = time() * 10;
+//         closeBtn.color = hsl2rgb((t / 10) % 1, 0.6, 0.7);
+//         closeBtn.scale = vec2(1.2);
+//     // setCursor("pointer");
+//    });
+
+//    // onHoverEnd() comes from area() component
+//    // it runs once when the object stopped being hovered
+//       closeBtn.onHoverEnd(() => {
+//         closeBtn.scale = vec2(1);
+//         closeBtn.color = rgb();
+//    });
+
+//      closeBtn.onClick(close)
 
 
    
  
-}//end of display menu
+// }//end of display menu
 
+  // 
+// function close(){
+//     console.log("close button clicked")
+//     closePressed = true
   
-function close(){
-    console.log("close button clicked")
-    closePressed = true
-  
-}
+// }
 
-function open(){
-  console.log("open button clicked")
-  openPressed = true
+// function open(){
+//   console.log("open button clicked")
+//   openPressed = true
   
-}
+// }
   
   onClick((obj) => {
     const textbox = document.getElementById("textbox");
@@ -626,147 +469,69 @@ function open(){
 
   });
 
-  desk.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.desk
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-  printer.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.printer
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-  bookshelf.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.printer
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-  door.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.door
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-  certificate.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.certificate
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-  tv.onClick(() => {
-      // This will run when you click on the player
-    textbox.innerHTML = dialogueData.tv
-
-    if (textbox.style.display === "block") {
-      textbox.style.display = "none";
-    } 
-    else {
-        textbox.style.display = "block";  // Show it
-    }
-
-  });
-
-
+  
  
   
-  fridge.onClick(() => {
-    debug.log("clicked on fridge")
-    console.log(" clicked on fridge")
+  // fridge.onClick(() => {
+  //   debug.log("clicked on fridge")
+  //   console.log(" clicked on fridge")
 
    
 
     
-    if (openPressed == true){
+  //   if (openPressed == true){
 
-      let theFridge = get("fridge")
-      // console.log(theUi)
-      if (theFridge.length > 0){
-        destroy(theFridge[0])
-      }
+  //     let theFridge = get("fridge")
+  //     // console.log(theUi)
+  //     if (theFridge.length > 0){
+  //       destroy(theFridge[0])
+  //     }
 
       
-      const fridgeopen = add([
-        sprite("fridgeopen"), 
-          pos(639,115),
-          area(),
-          anchor("center"),
-          "fridgeopen",
-          scale(1.5),
-      ]);
+  //     const fridgeopen = add([
+  //       sprite("fridgeopen"), 
+  //         pos(639,115),
+  //         area(),
+  //         anchor("center"),
+  //         "fridgeopen",
+  //         scale(1.5),
+  //     ]);
 
 
-      openPressed = false
-    }
+  //     openPressed = false
+  //   }
     
   
     
-  }); //end of fridge on click
+  // }); //end of fridge on click
 
-  fridgeopen.onClick(() => {
-    console.log("fridge open clicked")
+  // fridgeopen.onClick(() => {
+  //   console.log("fridge open clicked")
     
     
 
     
-   if (closePressed == true){
+  //  if (closePressed == true){
 
-      let theOpenFridge = get("fridgeopen")
-      console.log(theOpenFridge)
-      if (theOpenFridge.length > 0){
-        destroy(theOpenFridge[0])
-      }
+  //     let theOpenFridge = get("fridgeopen")
+  //     console.log(theOpenFridge)
+  //     if (theOpenFridge.length > 0){
+  //       destroy(theOpenFridge[0])
+  //     }
      
-      const fridge = add([
-        sprite("fridge"), 
-          pos(650,115),
-          area(),
-          anchor("center"),
-          "fridge",
-          scale(1.5),
-      ]);
+  //     const fridge = add([
+  //       sprite("fridge"), 
+  //         pos(650,115),
+  //         area(),
+  //         anchor("center"),
+  //         "fridge",
+  //         scale(1.5),
+  //     ]);
       
-      closePressed = false
-    }
+  //     closePressed = false
+  //   }
 
-  });
+  // });
 
 
 
@@ -778,32 +543,6 @@ function open(){
   // })
 
 
-  steve.onCollideEnd("desk", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("couch", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("bookshelf", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("gamingsetup", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("printer", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("door", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("certificate", (a) => {
-    textbox.style.display = "none";
-  });
-  steve.onCollideEnd("tv", (a) => {
-    textbox.style.display = "none";
-  });
-
-// steve.trigger("click")// not working
   
   on("start", "steve", () => {
     textbox.innerHTML = dialogueData.me
@@ -817,8 +556,6 @@ function open(){
   });
 
 
-    steve.trigger("start");
-  
-// go("gameOver")
+steve.trigger("start");
 
 })

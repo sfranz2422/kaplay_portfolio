@@ -11,7 +11,9 @@ printer: `<p>This is my resume. <a href="https://github.com/sfranz2422/resume/bl
 gamingsetup: `<p>I started learning to code when I was 12 years old because I wanted to make my own video games.  My first game was made with BASIC on a Commodore 64!  This portfolio is made with Kaboom.js a JavaScript library for making games.  I've also make games with <a target="_blank" href="https://thefranz.itch.io/">p5play</a> and Godot.  Actually I've made an entire site, called <a target="_blank" href="https://quizplayground.com/">Quiz Playground</a> that incorporates formative assessment with games I've made with Godot.</p>`,
 bookshelf: `<p>There are a lot of programming and web development books on my shelves in addition to science fiction and fantasy.  Speaking of web development, <a target="_blank" href="https://redlawns.com/">here is a website</a> I've made for a client recently. I built Red Leaf's website using Flask for a scalable backend.`,
 door: `<p>If you want to exit my portfolio, just close the tab.</p>`,
-me:`<p>Welcome to my interactive portfolio! <br>In this 2D world, you can explore a virtual version of my house, where each object offers a bit of insight into my work. To begin your journey, simply click anywhere in the room to move. You\’ll be able to interact with various objects along the way. When you move me in front of an object, a short description will pop up, sharing more about it and about me!</p>`
+me:`<p>Welcome to my interactive portfolio! <br>In this 2D world, you can explore a virtual version of my house, where each object offers a bit of insight into my work. To begin your journey, simply click anywhere in the room to move. You\’ll be able to interact with various objects along the way. When you move me in front of an object, a short description will pop up, sharing more about it and about me!</p>`,
+hangingpan:`<p>This is my favorite egg pan.</p><p>I can cook some eggs on the stove.</p>`,
+fridge:`<p>Hey an egg!</p><p>I can make this for lunch.</p>`,
 };
 
 

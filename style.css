@@ -10,25 +10,25 @@ p{
 }
 
 p {
-  font-size: 10px; /* Default for smaller devices */
+  font-size: 8px; /* Default for smaller devices */
   /* line-height: 1.5; */
 }
 
 @media (min-width: 600px) { /* Tablets and larger phones in landscape */
   p {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
 @media (min-width: 900px) { /* Small laptops and larger tablets */
   p {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
 @media (min-width: 1200px) { /* Desktop screens */
   p {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 /* #game{
